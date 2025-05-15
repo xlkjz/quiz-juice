@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz o Juice WRLD</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 10px;
+            min-height: 100vh;
+            background: url('https://wallpaperaccess.com/full/4484543.jpg') no-repeat center center fixed;
+            background-size: cover;
+            text-align: center;
+            font-family: Arial, sans-serif;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            color: antiquewhite;
+            font-size: 32px;
+            margin-top: 20px;
+        }
+
+        p {
+            font-size: 22px;
+            color: antiquewhite;
+        }
+
+        button {
+            font-size: 20px;
+            cursor: pointer;
+            margin-top: 20px;
+            padding: 10px 20px;
+            border-radius: 10px;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: #ccc;
+            border: none;
+        }
+
+        .question {
+            display: none;
+            margin-top: 30px;
+        }
+
+        label {
+            font-size: 18px;
+        }
+
+        .square {
+            width: 150px;
+            height: 150px;
+            background-color: white;
+            border: 2px solid #ccc;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            margin: 10px;
+            text-align: center;
+        }
+
+        .question-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .result {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ffffff;
+            margin-top: 50px;
+            display: none;
+        }
+
+        .timer {
+            font-size: 20px;
+            color: #fff;
+            margin-top: 10px;
+        }
+
+        #button3,
+        #restartBtn {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 24px;
+            }
+
+            p, label {
+                font-size: 18px;
+            }
+            .question-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+        .square {
+    width: 45%; /* Każdy kwadrat zajmuje 45% szerokości */
+    height: 150px;
+    background-color: white;
+    border: 2px solid #ccc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    margin-bottom: 10px; /* Dodajemy przestrzeń na dole między kwadratami */
+}
+
+
+        
+
+            .result {
+                font-size: 20px;
+            }
+
+            button {
+                font-size: 18px;
+                padding: 8px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h1 id="startText">Witaj w Quizie o Juice WRLD</h1>
+    <p id="infoText">Aby rozpocząć, kliknij start</p>
+    <button id="startBtn" onclick="startQuiz()">Start</button>
+
+    <!-- Pytania -->
+    <div id="quiz">
+        <!-- Każde pytanie jak poniżej (skrót dla przykładu) -->
+        <div class="question" id="q1">
+            <p>1. W którym roku Juice WRLD wydał swój debiutancki album "Goodbye & Good Riddance"?</p>
+            <div class="question-container">
+                <div class="square"><label><input type="radio" name="q1" value="a"> 2016</label></div>
+                <div class="square"><label><input type="radio" name="q1" value="b"> 2017</label></div>
+                <div class="square"><label><input type="radio" name="q1" value="c"> 2018</label></div>
+                <div class="square"><label><input type="radio" name="q1" value="d"> 2019</label></div>
+            </div>
+            <div class="timer" id="timer1"></div>
+            <button onclick="showQuestion('q1', 'q2')">Dalej</button>
+        </div>
+
+        <div class="question" id="q2">
+            <p>2. Jakie było prawdziwe imię Juice WRLD?</p>
+            <div class="question-container">
+                <div class="square"><label><input type="radio" name="q2" value="a"> Jarad Higgins</label></div>
+                <div class="square"><label><input type="radio" name="q2" value="b"> Jordyn Lucas</label></div>
+                <div class="square"><label><input type="radio" name="q2" value="c"> Trippie Redd</label></div>
+                <div class="square"><label><input type="radio" name="q2" value="d"> Malik Williams</label></div>
+            </div>
+            <div class="timer" id="timer2"></div>
+            <button onclick="showQuestion('q2', 'q3')">Dalej</button>
+        </div>
+          <!-- Pytanie 3 -->
+    <div class="question" id="q3">
+        <p>3. W jakim mieście urodził się Juice WRLD?</p>
+        <div class="question-container">
+            <div class="square"><label><input type="radio" name="q3" value="a"> Nowy Jork</label></div>
+            <div class="square"><label><input type="radio" name="q3" value="b"> Los Angeles</label></div>
+            <div class="square"><label><input type="radio" name="q3" value="c"> Chicago</label></div>
+            <div class="square"><label><input type="radio" name="q3" value="d"> Atlanta</label></div>
+        </div>
+        <div class="timer" id="timer3"></div>
+        <button onclick="showQuestion('q3', 'q4')">Dalej</button>
+    </div>
+
+    <!-- Pytanie 4 -->
+    <div class="question" id="q4">
+        <p>4. Jaki utwór Juice WRLD był jego największym hitem?</p>
+        <div class="question-container">
+            <div class="square"><label><input type="radio" name="q4" value="a"> All Girls Are the Same</label></div>
+            <div class="square"><label><input type="radio" name="q4" value="b"> Legends</label></div>
+            <div class="square"><label><input type="radio" name="q4" value="c"> Lucid Dreams</label></div>
+            <div class="square"><label><input type="radio" name="q4" value="d"> Righteous</label></div>
+        </div>
+        <div class="timer" id="timer4"></div>
+        <button onclick="showQuestion('q4', 'q5')">Dalej</button>
+    </div>
+
+    <!-- Pytanie 5 -->
+    <div class="question" id="q5">
+        <p>5. Jakie albumy Juice WRLD wydał po śmierci?</p>
+        <div class="question-container">
+            <div class="square"><label><input type="radio" name="q5" value="a"> Death Race for Love</label></div>
+            <div class="square"><label><input type="radio" name="q5" value="b"> Fighting Demons</label></div>
+            <div class="square"><label><input type="radio" name="q5" value="c"> Legends Never Die</label></div>
+            <div class="square"><label><input type="radio" name="q5" value="d"> All of the above</label></div>
+        </div>
+        <div class="timer" id="timer5"></div>
+        <button onclick="showQuestion('q5', 'q6')">Dalej</button>
+    </div>
+
+    <!-- Pytanie 6 -->
+    <div class="question" id="q6">
+        <p>6. Który raper był bliskim przyjacielem Juice WRLD?</p>
+        <div class="question-container">
+            <div class="square"><label><input type="radio" name="q6" value="a"> Post Malone</label></div>
+            <div class="square"><label><input type="radio" name="q6" value="b"> Lil Uzi Vert</label></div>
+            <div class="square"><label><input type="radio" name="q6" value="c"> XXXTentacion</label></div>
+            <div class="square"><label><input type="radio" name="q6" value="d"> Travis Scott</label></div>
+        </div>
+        <div class="timer" id="timer6"></div>
+        <button onclick="showQuestion('q6', 'q7')" id="b3">Dalej</button>
+    </div>
+
+
+        <div class="question" id="q7">
+            <p>7. W jakim roku Juice WRLD zmarł?</p>
+            <div class="question-container">
+                <div class="square"><label><input type="radio" name="q7" value="a"> 2018</label></div>
+                <div class="square"><label><input type="radio" name="q7" value="b"> 2019</label></div>
+                <div class="square"><label><input type="radio" name="q7" value="c"> 2020</label></div>
+                <div class="square"><label><input type="radio" name="q7" value="d"> 2021</label></div>
+            </div>
+            <div class="timer" id="timer7"></div>
+            <button id="button3" onclick="checkAnswers()">Sprawdź wynik</button>
+        </div>
+    </div>
+
+    <button id="restartBtn" onclick="location.reload()">Zagraj ponownie</button>
+    <div class="result" id="result"></div>
+
+    <script>
+        let timerInterval;
+        let timeLeft = 15;
+        let currentQuestionId = 'q1';
+
+        function startQuiz() {
+            document.getElementById("startText").style.display = "none";
+            document.getElementById("infoText").style.display = "none";
+            document.getElementById("startBtn").style.display = "none";
+            document.getElementById("q1").style.display = "block";
+            startTimer('timer1');
+        }
+
+        function startTimer(timerId) {
+            timeLeft = 15;
+            const timerElement = document.getElementById(timerId);
+            timerInterval = setInterval(function () {
+                timerElement.innerText = "Czas: " + timeLeft + "s";
+                timeLeft--;
+                if (timeLeft < 0) {
+                    clearInterval(timerInterval);
+                    showQuestion(currentQuestionId, getNextQuestionId(currentQuestionId));
+                }
+            }, 1000);
+        }
+
+        function getNextQuestionId(currentId) {
+            const order = ['q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7'];
+            const idx = order.indexOf(currentId);
+            return idx >= 0 && idx < order.length - 1 ? order[idx + 1] : null;
+        }
+
+        function showQuestion(currentId, nextId) {
+            clearInterval(timerInterval);
+            document.getElementById(currentId).style.display = "none";
+            if (nextId) {
+                document.getElementById(nextId).style.display = "block";
+                currentQuestionId = nextId;
+                startTimer('timer' + nextId.charAt(1));
+                if (nextId === 'q7') {
+                    document.getElementById("button3").style.display = "inline";
+                }
+            }
+        }
+
+        function checkAnswers() {
+            const answers = {
+                q1: 'c', q2: 'a', q3: 'c', q4: 'c',
+                q5: 'd', q6: 'c', q7: 'b'
+            };
+            let score = 0;
+            let resultText = '';
+
+            for (let key in answers) {
+                const selected = document.querySelector(`input[name="${key}"]:checked`);
+                if (selected && selected.value === answers[key]) {
+                    score++;
+                    resultText += `Pytanie ${key.slice(1)}: ✅<br>`;
+                } else {
+                    resultText += `Pytanie ${key.slice(1)}: ❌ (poprawna: ${answers[key]})<br>`;
+                }
+            }
+
+            document.getElementById("q7").style.display = "none";
+            document.getElementById("result").innerHTML = `Twój wynik: ${score} z 7<br><br>` + resultText;
+            document.getElementById("result").style.display = "block";
+            document.getElementById("restartBtn").style.display = "inline";
+            document.body.style.background = "url('https://wallpaperaccess.com/full/788586.jpg') no-repeat center center fixed";
+            document.body.style.backgroundSize = "cover";
+        }
+    </script>
+</body>
+</html>
