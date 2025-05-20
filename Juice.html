@@ -159,7 +159,7 @@
     border: none;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    display: block; /* żeby był wyśrodkowany */
+    display: block;
     max-width: 200px;
 }
 
@@ -204,7 +204,7 @@
     <button id="startBtn" onclick="startQuiz()">Start</button>
 
     <div id="quiz">
-        <!-- Pytania generowane dynamicznie w JS -->
+
     </div>
 
     <button id="restartBtn" onclick="restartQuiz()">Zagraj ponownie</button>
@@ -361,7 +361,7 @@
     let currentQuestion = 0;
     let score = 0;
     let timerInterval;
-    let timePerQuestion = 15; // seconds
+    let timePerQuestion = 15;
     let timeLeft = timePerQuestion;
     let answersSelected = [];
 
@@ -469,13 +469,13 @@
             square.appendChild(label);
             container.appendChild(square);
 
-            // Click on square checks radio
+            
             square.addEventListener("click", () => {
                 radio.checked = true;
                 checkAnswer(index);
             });
 
-            // Accessibility: pressing Enter on square triggers selection
+        
             square.addEventListener("keydown", (e) => {
                 if (e.key === "Enter" || e.key === " ") {
                     e.preventDefault();
@@ -519,7 +519,6 @@
             }
             if (timeLeft <= 0) {
                 clearInterval(timerInterval);
-                // Brak odpowiedzi = błędna, przejdź dalej
                 answersSelected[currentQuestion] = null;
                 currentQuestion++;
                 if (currentQuestion < t.questions.length) {
